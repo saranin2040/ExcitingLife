@@ -1,8 +1,15 @@
 package com.example.excitinglife;
 
+import android.content.BroadcastReceiver;
+import android.content.Context;
+import android.content.Intent;
+import android.content.IntentFilter;
+import android.content.SharedPreferences;
+import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.SystemClock;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -29,6 +36,32 @@ public class TimerFragment extends Fragment {
         // Required empty public constructor
     }
 
+    private BroadcastReceiver br = new BroadcastReceiver() {
+        @Override
+        public void onReceive(Context context, Intent intent) {
+            int days = intent.getIntExtra("days", 0);
+            int hours = intent.getIntExtra("hours", 0);
+            int minutes = intent.getIntExtra("mins", 0);
+            int seconds = intent.getIntExtra("secs", 0);
+            int milliseconds = intent.getIntExtra("millis", 0);
+
+            timerTextView.setText(String.format("%d:%02d:%02d:%02d:%02d", days, hours, minutes, seconds, milliseconds));
+        }
+    };
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        getActivity().registerReceiver(br, new IntentFilter(TimerService.TIMER_BR)); // Используем getActivity() для регистрации
+    }
+
+    @Override
+    public void onPause() {
+        super.onPause();
+        getActivity().unregisterReceiver(br); // Используем getActivity() для отмены регистрации
+    }
+
+
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
@@ -44,15 +77,19 @@ public class TimerFragment extends Fragment {
         toggleButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                Intent intent = new Intent(getActivity(), TimerService.class);
+
                 if (!isRunning) {
-                    startTime = SystemClock.uptimeMillis();
-                    handler.postDelayed(timerRunnable, 0);
+                    // Для запуска таймера
+                    Log.d("saranin","start");
+                    intent.setAction(TimerService.ACTION_START);
                     toggleButton.setText("Stop");
                 } else {
-                    timeBuffer += timeInMilliseconds;
-                    handler.removeCallbacks(timerRunnable);
+                    // Для остановки таймера
+                    intent.setAction(TimerService.ACTION_STOP);
                     toggleButton.setText("Start");
                 }
+                getActivity().startService(intent);
                 isRunning = !isRunning;
                 animationView.playAnimation();
             }
@@ -61,26 +98,29 @@ public class TimerFragment extends Fragment {
         return view;
     }
 
-    private Runnable timerRunnable = new Runnable() {
-        public void run() {
-            timeInMilliseconds = SystemClock.uptimeMillis() - startTime;
-            updatedTime = timeBuffer + timeInMilliseconds;
+    // Сохранение времени секундомера перед выключением устройства
 
-            int secs = (int) (updatedTime / 1000);
-            int mins = secs / 60;
-            secs %= 60;
-            int milliseconds = (int) (updatedTime % 1000);
-            int tenths = milliseconds / 100;
-            int hundredths = (milliseconds % 100) / 10;
 
-            timerTextView.setText(String.format("%02d:%02d:%1d%1d", mins, secs, tenths, hundredths));
-            handler.postDelayed(this, 10);
-        }
-    };
+//    private Runnable timerRunnable = new Runnable() {
+//        public void run() {
+//            timeInMilliseconds = SystemClock.uptimeMillis() - startTime;
+//            updatedTime = timeBuffer + timeInMilliseconds;
+//
+//            int secs = (int) (updatedTime / 1000);
+//            int mins = secs / 60;
+//            secs %= 60;
+//            int milliseconds = (int) (updatedTime % 1000);
+//            int tenths = milliseconds / 100;
+//            int hundredths = (milliseconds % 100) / 10;
+//
+//            timerTextView.setText(String.format("%02d:%02d:%1d%1d", mins, secs, tenths, hundredths));
+//            handler.postDelayed(this, 10);
+//        }
+//    };
 
-    @Override
-    public void onDestroy() {
-        super.onDestroy();
-        handler.removeCallbacks(timerRunnable); // Остановить handler при уничтожении фрагмента
-    }
+//    @Override
+//    public void onDestroy() {
+//        super.onDestroy();
+//        handler.removeCallbacks(timerRunnable); // Остановить handler при уничтожении фрагмента
+//    }
 }
