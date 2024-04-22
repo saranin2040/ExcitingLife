@@ -2,8 +2,7 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:id="@+id/screen_second"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:gravity="center">
+    android:layout_height="match_parent">
 
     <TextView
         android:id="@+id/numberTextView"
@@ -11,5 +10,42 @@
         android:layout_height="wrap_content"
         android:layout_centerInParent="true"
         android:text="42"
-        android:textSize="48sp" />
+        android:textSize="156sp" />
+
+    <LinearLayout
+        android:id="@+id/buttonLayout"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/numberTextView"
+        android:layout_centerHorizontal="true"
+        android:orientation="horizontal"
+        android:layout_marginTop="20dp">
+
+        <Button
+            android:id="@+id/earnButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Заработать"
+            android:layout_marginRight="16dp" />
+
+        <Button
+            android:id="@+id/buyButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Купить" />
+
+    </LinearLayout>
+
+    <!-- RecyclerView теперь расположен непосредственно под numberTextView -->
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/taskRecyclerView"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@id/numberTextView"
+        android:layout_marginTop="-350dp"
+        android:paddingTop="20dp"
+        android:visibility="visible">
+        <!-- Вложенный контент -->
+    </androidx.recyclerview.widget.RecyclerView>
+
 </RelativeLayout>

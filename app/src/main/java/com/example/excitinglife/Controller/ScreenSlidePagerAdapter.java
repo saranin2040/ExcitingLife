@@ -1,4 +1,4 @@
-package com.example.excitinglife;
+package com.example.excitinglife.Controller;
 
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;

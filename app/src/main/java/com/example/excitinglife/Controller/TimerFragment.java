@@ -1,4 +1,4 @@
-package com.example.excitinglife;
+package com.example.excitinglife.Controller;
 
 import android.content.BroadcastReceiver;
 import android.content.Context;
@@ -18,6 +18,8 @@ import android.widget.TextView;
 import androidx.fragment.app.Fragment;
 import com.airbnb.lottie.LottieAnimationView;
 import com.airbnb.lottie.RenderMode;
+import com.example.excitinglife.R;
+import com.example.excitinglife.TimerService;
 
 public class TimerFragment extends Fragment {
 

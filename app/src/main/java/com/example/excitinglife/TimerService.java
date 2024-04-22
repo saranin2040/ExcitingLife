@@ -44,8 +44,8 @@ public class TimerService extends Service {
         PendingIntent pendingIntent = PendingIntent.getActivity(this, 0, notificationIntent, PendingIntent.FLAG_MUTABLE);
 
         return new NotificationCompat.Builder(this, CHANNEL_ID)
-                .setContentTitle("Running Timer")
-                .setContentText("Timer is running in background")
+                .setContentTitle("Im saranin 2040")
+                .setContentText("I'm watching you 0_0")
                 .setSmallIcon(R.drawable.ic_notification)
                 .setContentIntent(pendingIntent)
                 .build();
@@ -99,8 +99,8 @@ public class TimerService extends Service {
             if (ACTION_START.equals(action)) {
                 startTimer();
                 //startForeground(ONGOING_NOTIFICATION_ID, createNotification());
-                Notification notification = new Notification.Builder(this, CHANNEL_ID).build();
-                startForeground(ONGOING_NOTIFICATION_ID, notification);
+                //Notification notification = new Notification.Builder(this, CHANNEL_ID).build();
+                startForeground(ONGOING_NOTIFICATION_ID, createNotification());
             } else if (ACTION_STOP.equals(action)) {
                 stopTimer();
                 stopForeground(true);
