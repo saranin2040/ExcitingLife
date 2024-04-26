@@ -1,11 +1,16 @@
 package com.example.excitinglife;
 
 import android.os.Bundle;
+import android.util.Log;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.viewpager.widget.ViewPager;
 
+import com.example.excitinglife.BusinessLogic.BusinessLogic;
+import com.example.excitinglife.BusinessLogic.Commodity.Commodity;
 import com.example.excitinglife.Controller.ScreenSlidePagerAdapter;
+
+import java.util.HashMap;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -13,7 +18,8 @@ public class MainActivity extends AppCompatActivity {
     private ScreenSlidePagerAdapter pagerAdapter;
 
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
+    protected void onCreate(Bundle savedInstanceState)
+    {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_screen_swipe);
         //Intent serviceIntent = new Intent(this, TimerService.class);
@@ -28,7 +34,43 @@ public class MainActivity extends AppCompatActivity {
         viewPager = findViewById(R.id.view_pager);
         pagerAdapter = new ScreenSlidePagerAdapter(getSupportFragmentManager());
         viewPager.setAdapter(pagerAdapter);
+
+
+        bc.put(0,new BusinessLogic(getApplicationContext().getFilesDir()));
+        //loadObjects();
     }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        Log.d("saranin","saving active");
+
+        saveObjects(); // Сохранение стопвотчей перед закрытием приложения
+    }
+
+    private void saveObjects() {
+        bc.get(0).saveStopwatches();
+    }
+
+    @Override
+    protected void onStop() {
+        super.onStop();
+        Log.d("MainActivity", "Saving objects on stop");
+        saveObjects();  // Сохранение данных
+    }
+
+    @Override
+    protected void onPause() {
+        super.onPause();
+        Log.d("MainActivity", "Saving objects on pause");
+        saveObjects();  // Сохранение данных
+    }
+
+//    private void loadObjects() {
+//        bc.loadStopwatches();
+//    }
+
+    static public HashMap<Integer, BusinessLogic> bc=new HashMap<Integer, BusinessLogic>();
 
 //    @Override
 //    protected void onPause() {
