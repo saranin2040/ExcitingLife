@@ -18,6 +18,8 @@ import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.util.HashMap;
 
+//Привет любимый Дмитрий Ерошенко!
+
 public class BusinessLogic
 {
 
@@ -155,6 +157,7 @@ public class BusinessLogic
 
         return tmp;//TODO если переполниться, проверку добавить
     }
+
 
 
     private Integer getNextCommidityId()
