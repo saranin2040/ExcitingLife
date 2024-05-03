@@ -28,6 +28,11 @@ public class BusinessLogic
         if (stopwatchs.isEmpty()) {
             addStopwatch("time your stupid");
         }
+        else {
+            nextStopwatchId=stopwatchs.size();
+        }
+
+
 
         long elapsedTime = getStopwatchs().get(0).getElapsedTime();
 
@@ -116,16 +121,16 @@ public class BusinessLogic
         return true;
     }
 
-    public void startStopwatch(Integer taskId)
+    public void startStopwatch(Integer stopwatchId)
     {
-        StopwatchDo stopwatch= (StopwatchDo) stopwatchs.get(taskId);
+        StopwatchDo stopwatch= (StopwatchDo) stopwatchs.get(stopwatchId);
         stopwatch.start();
     }
 
-    public void stopStopwatch(Integer taskId)
+    public void stopStopwatch(Integer stopwatchId)
     {
         Log.d("saranin","bc stop stopwatch");
-        StopwatchDo stopwatch= (StopwatchDo) stopwatchs.get(taskId);
+        StopwatchDo stopwatch= (StopwatchDo) stopwatchs.get(stopwatchId);
         stopwatch.stop();
         //saveStopwatches();
     }
@@ -176,7 +181,7 @@ public class BusinessLogic
             out.writeObject(stopwatchs);
             out.close();
             fileOut.close();
-            Log.d("saranin", "Stopwatches saved successfully.");
+            Log.d("saranin", "Stopwatches saved successfully. size = "+stopwatchs.size());
         } catch (IOException e) {
             e.printStackTrace();
         }

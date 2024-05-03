@@ -5,24 +5,51 @@
     android:layout_height="match_parent"
     android:padding="16dp">
 
-    <TextView
-        android:id="@+id/timerTextView"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="00:00:00"
-        android:textSize="48sp"
-        android:layout_centerHorizontal="true"
-        android:layout_above="@+id/toggleButton"
-        android:layout_marginBottom="24dp"/>
+    <!-- Включаем новый макет с таймером и кнопкой-->
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
 
-    <Button
-        android:id="@+id/toggleButton"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Start"
-        android:layout_centerInParent="true"
-        android:padding="16dp"
-        android:background="@drawable/button_background" />
+        <LinearLayout
+            android:id="@+id/timerContainer"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+
+            <!-- Добавляем 5 экземпляров timer_control_layout
+            <include
+                android:id="@+id/timerControl1"
+                layout="@layout/timer_control_layout"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
+
+            <include
+                android:id="@+id/timerControl2"
+                layout="@layout/timer_control_layout"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
+
+            <include
+                android:id="@+id/timerControl3"
+                layout="@layout/timer_control_layout"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
+
+            <include
+                android:id="@+id/timerControl4"
+                layout="@layout/timer_control_layout"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
+
+            <include
+                android:id="@+id/timerControl5"
+                layout="@layout/timer_control_layout"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />-->
+
+        </LinearLayout>
+    </ScrollView>
 
     <com.airbnb.lottie.LottieAnimationView
         android:id="@+id/animation_view"
@@ -33,5 +60,15 @@
         app:lottie_fileName="particle_animation.json"
         app:lottie_loop="false" />
 
-</RelativeLayout>
+    <Button
+        android:id="@+id/addTimerButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentEnd="true"
+        android:text="Add Timer" />
 
+
+
+
+</RelativeLayout>

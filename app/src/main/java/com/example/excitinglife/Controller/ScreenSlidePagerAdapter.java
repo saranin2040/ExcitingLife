@@ -6,7 +6,7 @@ import androidx.fragment.app.FragmentPagerAdapter;
 
 public class ScreenSlidePagerAdapter extends FragmentPagerAdapter {
 
-    private static final int NUM_PAGES = 2;
+    private static final int NUM_PAGES = 3;
 
     public ScreenSlidePagerAdapter(FragmentManager fm) {
         super(fm);
@@ -14,16 +14,19 @@ public class ScreenSlidePagerAdapter extends FragmentPagerAdapter {
 
     @Override
     public Fragment getItem(int position) {
-        // Возвращает соответствующий фрагмент для каждой позиции
+        // Новый порядок страниц: 0 - LogFragment, 1 - TimerFragment, 2 - SecondScreenFragment
         switch (position) {
             case 0:
-                return new TimerFragment(); // Заменить на ваш фрагмент с таймером
+                return new LogFragment(); // Новый фрагмент с логами
             case 1:
-                return new SecondScreenFragment(); // Заменить на ваш фрагмент со вторым экраном
+                return new TimerFragment(); // Существующий фрагмент с таймером
+            case 2:
+                return new SecondScreenFragment(); // Существующий второй экран
             default:
                 return null;
         }
     }
+
 
     @Override
     public int getCount() {

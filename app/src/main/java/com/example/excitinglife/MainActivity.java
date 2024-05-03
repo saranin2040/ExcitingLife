@@ -2,6 +2,9 @@ package com.example.excitinglife;
 
 import android.os.Bundle;
 import android.util.Log;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.view.ViewGroup;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.viewpager.widget.ViewPager;
@@ -9,7 +12,9 @@ import androidx.viewpager.widget.ViewPager;
 import com.example.excitinglife.BusinessLogic.BusinessLogic;
 import com.example.excitinglife.BusinessLogic.Commodity.Commodity;
 import com.example.excitinglife.Controller.ScreenSlidePagerAdapter;
+import com.example.excitinglife.Controller.TimerControlFragment;
 
+import java.security.AccessController;
 import java.util.HashMap;
 
 public class MainActivity extends AppCompatActivity {
@@ -22,23 +27,34 @@ public class MainActivity extends AppCompatActivity {
     {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_screen_swipe);
-        //Intent serviceIntent = new Intent(this, TimerService.class);
-        //serviceIntent.setAction(TimerService.ACTION_START);
-//        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
-//            startForegroundService(serviceIntent);
-//        } else {
-//            startService(serviceIntent);
-//        }
 
-        //stopService(serviceIntent); // Остановка службы
         viewPager = findViewById(R.id.view_pager);
         pagerAdapter = new ScreenSlidePagerAdapter(getSupportFragmentManager());
         viewPager.setAdapter(pagerAdapter);
+        viewPager.setCurrentItem(1);
+
+//        if (savedInstanceState == null) {
+//            getSupportFragmentManager().beginTransaction()
+//                    .replace(R.id.timerFragmentContainer, new TimerControlFragment())
+//                    .commit();
+//        }
+
+//        if (savedInstanceState == null) {
+//            getSupportFragmentManager().beginTransaction()
+//                    .add(R.id.view_pager, new TimerControlFragment())
+//                    .commit();
+//        }
 
 
         bc.put(0,new BusinessLogic(getApplicationContext().getFilesDir()));
-        //loadObjects();
     }
+
+//    public void onClick(View v) {
+//
+//        Log.d("saranin","saving active");
+//
+//    }
+
 
     @Override
     protected void onDestroy() {
@@ -66,56 +82,7 @@ public class MainActivity extends AppCompatActivity {
         saveObjects();  // Сохранение данных
     }
 
-//    private void loadObjects() {
-//        bc.loadStopwatches();
-//    }
 
     static public HashMap<Integer, BusinessLogic> bc=new HashMap<Integer, BusinessLogic>();
 
-//    @Override
-//    protected void onPause() {
-//        super.onPause();
-//        // Сохранение времени секундомера перед выключением устройства
-//        saveTimerStartTime();
-//    }
-//
-//    @Override
-//    protected void onResume() {
-//        super.onResume();
-//        // Восстановление времени секундомера после перезагрузки устройства
-//        restoreTimerStartTime();
-//        // Запуск или продолжение таймера
-//        startTimer();
-//    }
-//
-//    private void updateTime() {
-//        // Обновление времени секундомера
-//        // Ваш код обновления времени
-//    }
-//
-//    private void saveTimerStartTime() {
-//        // Сохранение времени секундомера перед выключением устройства
-//        SharedPreferences prefs = getSharedPreferences("MyPrefs", MODE_PRIVATE);
-//        SharedPreferences.Editor editor = prefs.edit();
-//        editor.putLong("startTime", startTime);
-//        editor.apply();
-//    }
-//
-//    private void restoreTimerStartTime() {
-//        // Восстановление времени секундомера после перезагрузки устройства
-//        SharedPreferences prefs = getSharedPreferences("MyPrefs", MODE_PRIVATE);
-//        startTime = prefs.getLong("startTime", 0);
-//    }
-//
-//    private void startTimer() {
-//        // Запуск или продолжение таймера
-//        if (startTime > 0) {
-//            // Если есть сохраненное время, продолжаем отсчет с момента, на котором остановились
-//            handler.postDelayed(timerRunnable, 0);
-//        } else {
-//            // Иначе начинаем отсчет с нуля
-//            startTime = SystemClock.uptimeMillis();
-//            handler.postDelayed(timerRunnable, 0);
-//        }
-//    }
 }

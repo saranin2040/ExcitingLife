@@ -20,7 +20,9 @@ public class StopwatchDo implements Stopwatch, Serializable
     {
         if (launch)
         {
-            return SystemClock.elapsedRealtime() - startTime + elapsedTime;
+            long currentElapsed = SystemClock.elapsedRealtime() - startTime;
+            return SystemClock.elapsedRealtime() - startTime+ elapsedTime;
+            //return SystemClock.elapsedRealtime() - startTime + elapsedTime;
         }
 
         return elapsedTime;
@@ -33,24 +35,29 @@ public class StopwatchDo implements Stopwatch, Serializable
     }
 
     public void start(){
-        Log.d("SARANIN","start stop watch");
+
         if (!launch) {
+            //startTime = SystemClock.elapsedRealtime();
+            //elapsedTime=23700532302411L;
             startTime = SystemClock.elapsedRealtime();
             launch = true;
         }
+
+        Log.d("SARANIN","current time"+SystemClock.elapsedRealtime()+" | startTime="+startTime+" elapsedTime="+elapsedTime+" getElapsedTime="+(SystemClock.elapsedRealtime() - startTime + elapsedTime));
     }
 
     public void stop(){
         if (launch) {
+            elapsedTime = getElapsedTime();
             launch = false;
             Log.d("saranin","im false");
-            elapsedTime = SystemClock.elapsedRealtime() - startTime + elapsedTime;
+
         }
     }
 
     private String name=null;
     private long startTime;
-    private long elapsedTime=0;
+    private long elapsedTime=0L;
 
     private boolean launch=false;
 
