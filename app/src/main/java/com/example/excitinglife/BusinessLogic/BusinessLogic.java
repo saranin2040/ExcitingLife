@@ -16,6 +16,7 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
+import java.util.Collections;
 import java.util.HashMap;
 
 //Привет любимый Дмитрий Ерошенко!
@@ -31,7 +32,7 @@ public class BusinessLogic
             addStopwatch("time your stupid");
         }
         else {
-            nextStopwatchId=stopwatchs.size();
+            nextStopwatchId= Collections.max(stopwatchs.keySet())+1;
         }
 
 

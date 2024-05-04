@@ -83,6 +83,11 @@ public class MainActivity extends AppCompatActivity {
     }
 
 
+
+    static public BusinessLogic getBc()
+    {
+        return bc.get(0);
+    }
     static public HashMap<Integer, BusinessLogic> bc=new HashMap<Integer, BusinessLogic>();
 
 }

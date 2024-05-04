@@ -15,39 +15,6 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical">
-
-
-            <!-- Добавляем 5 экземпляров timer_control_layout
-            <include
-                android:id="@+id/timerControl1"
-                layout="@layout/timer_control_layout"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content" />
-
-            <include
-                android:id="@+id/timerControl2"
-                layout="@layout/timer_control_layout"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content" />
-
-            <include
-                android:id="@+id/timerControl3"
-                layout="@layout/timer_control_layout"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content" />
-
-            <include
-                android:id="@+id/timerControl4"
-                layout="@layout/timer_control_layout"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content" />
-
-            <include
-                android:id="@+id/timerControl5"
-                layout="@layout/timer_control_layout"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content" />-->
-
         </LinearLayout>
     </ScrollView>
 
@@ -67,8 +34,5 @@
         android:layout_alignParentBottom="true"
         android:layout_alignParentEnd="true"
         android:text="Add Timer" />
-
-
-
 
 </RelativeLayout>
