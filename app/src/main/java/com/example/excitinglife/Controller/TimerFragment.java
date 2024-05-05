@@ -16,6 +16,13 @@ import com.example.excitinglife.SmartLog;
 import com.example.excitinglife.MainActivity;
 import com.example.excitinglife.R;
 
+import android.app.AlertDialog;
+import android.content.DialogInterface;
+import android.widget.EditText;
+import android.text.InputType;
+import android.widget.Toast;
+
+
 public class TimerFragment extends Fragment {
     public TimerFragment() {
         // Required empty public constructor
@@ -39,10 +46,38 @@ public class TimerFragment extends Fragment {
             @Override
             public void onClick(View v)
             {
-                Integer id= MainActivity.getBc().addStopwatch("chocolate fish");
-                addnewStopwatch(view,id);
+                AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
+                builder.setTitle("Введи как будешь обзывать свой таймер");
 
-                SmartLog.logUseful("New stopwatch "+id);
+                final EditText input = new EditText(getActivity());
+                input.setInputType(InputType.TYPE_CLASS_TEXT);
+                builder.setView(input);
+
+                // Кнопка "OK", которая добавляет таймер с введенным названием
+                builder.setPositiveButton("OK", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        String timerName = input.getText().toString();
+                        if (!timerName.isEmpty()) {
+                            Integer id = MainActivity.getBc().addStopwatch(timerName);
+                            addnewStopwatch(view, id);
+                            SmartLog.logUseful("New stopwatch " + id + " with name " + timerName);
+                        } else {
+                            Toast.makeText(getActivity(), "Name cannot be empty", Toast.LENGTH_SHORT).show();
+                        }
+                    }
+                });
+
+                builder.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which)
+                    {
+                        SmartLog.logUseful("Отмена подписывания договора дьявола");
+                        dialog.cancel();
+                    }
+                });
+
+                builder.show(); // Показываем диалоговое окно
             }
         });
         return view;
@@ -58,12 +93,18 @@ public class TimerFragment extends Fragment {
         String timerId = "timer" + container.getChildCount();
         timerControlView.setTag(timerId);
 
-        TextView timerValueTextView = timerControlView.findViewById(R.id.timerTextView);
+        TextView daysValue = timerControlView.findViewById(R.id.daysValue);
+        TextView hoursValue = timerControlView.findViewById(R.id.hoursValue);
+        TextView minutesValue = timerControlView.findViewById(R.id.minutesValue);
+        TextView secondsValue = timerControlView.findViewById(R.id.secondsValue);
+        TextView millisecondsValue = timerControlView.findViewById(R.id.millisecondsValue);
+
+        TextView timerName = timerControlView.findViewById(R.id.textTimerName);
 
         Button toggleButton = timerControlView.findViewById(R.id.toggleButton);
         Button closeButton = timerControlView.findViewById(R.id.closeButton);
 
-        toggleButton.setOnClickListener(new TimerControlFragment(timerValueTextView,toggleButton,closeButton,id));
+        toggleButton.setOnClickListener(new TimerControlFragment(timerName,daysValue,hoursValue,minutesValue,secondsValue,millisecondsValue,toggleButton,closeButton,id));
         closeButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v)

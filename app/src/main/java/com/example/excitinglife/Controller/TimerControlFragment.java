@@ -17,15 +17,22 @@ import com.example.excitinglife.R;
 import com.example.excitinglife.SmartLog;
 
 public class TimerControlFragment extends Fragment implements View.OnClickListener{
-    public TimerControlFragment(TextView timerValueTextView,Button toggleButton,Button closeButton,Integer id) {
-        textView=timerValueTextView;
+    public TimerControlFragment(TextView timerName,TextView daysValue,TextView hoursValue,TextView minutesValue,TextView secondsValue,TextView millisecondsValue,Button toggleButton,Button closeButton,Integer id)
+    {
+        this.timerName=timerName;
+
+        this.daysValue=daysValue;
+        this.hoursValue=hoursValue;
+        this.minutesValue=minutesValue;
+        this.secondsValue=secondsValue;
+        this.millisecondsValue=millisecondsValue;
+
         this.toggleButton=toggleButton;
         this.closeButton=closeButton;
         this.id=id;
 
-        Log.d("saranin","AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA");
-
-        textView.setText(getElapsedTimeString(MainActivity.getBc().getStopwatchs().get(id).getElapsedTime()));
+        setTimerValue(MainActivity.getBc().getStopwatchs().get(id).getElapsedTime());
+        timerName.setText(MainActivity.getBc().getStopwatchs().get(id).getName());
 
         if (MainActivity.bc.get(0).getStopwatchs().get(id).isLaunch()) {
             Log.d("saranin","start");
@@ -67,7 +74,7 @@ public class TimerControlFragment extends Fragment implements View.OnClickListen
                 handler.removeCallbacks(timerRunnable);
             }
             else {
-                textView.setText(getElapsedTimeString(stopwatch.getElapsedTime()));
+                setTimerValue(stopwatch.getElapsedTime());
                 handler.postDelayed(this, 10);
             }
         }
@@ -85,11 +92,32 @@ public class TimerControlFragment extends Fragment implements View.OnClickListen
         return String.format("%d:%02d:%02d:%02d:%02d", days, hours, minutes, seconds, milliseconds);
     }
 
+    private void setTimerValue(long elapsedTime)
+    {
+        int days = (int) (elapsedTime / (1000 * 60 * 60 * 24));
+        int hours = (int) ((elapsedTime / (1000 * 60 * 60)) % 24);
+        int minutes = (int) ((elapsedTime / (1000 * 60)) % 60);
+        int seconds = (int) ((elapsedTime / 1000) % 60);
+        int milliseconds = (int) (elapsedTime % 1000);
+        milliseconds = milliseconds / 10;
+
+        daysValue.setText(String.format("%d:",days));
+        hoursValue.setText(String.format("%02d:",hours));
+        minutesValue.setText(String.format("%02d:",minutes));
+        secondsValue.setText(String.format("%02d:",seconds));
+        millisecondsValue.setText(String.format("%02d",milliseconds));
+    }
 
     private Button toggleButton;
     private Button closeButton;
+    private TextView timerName;
+    TextView daysValue;
+    TextView hoursValue;
+    TextView minutesValue;
+    TextView secondsValue;
+    TextView millisecondsValue;
     private LottieAnimationView animationView;
     private Handler handler = new Handler();
     private int id;
-    private TextView textView;
+
 }

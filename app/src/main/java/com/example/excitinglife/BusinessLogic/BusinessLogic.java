@@ -34,21 +34,6 @@ public class BusinessLogic
         else {
             nextStopwatchId= Collections.max(stopwatchs.keySet())+1;
         }
-
-
-
-        long elapsedTime = getStopwatchs().get(0).getElapsedTime();
-
-        int days = (int) (elapsedTime / (1000 * 60 * 60 * 24));
-        int hours = (int) ((elapsedTime / (1000 * 60 * 60)) % 24);
-        int minutes = (int) ((elapsedTime / (1000 * 60)) % 60);
-        int seconds = (int) ((elapsedTime / 1000) % 60);
-        int milliseconds = (int) (elapsedTime % 1000);
-        milliseconds = milliseconds / 10;
-
-
-        //timerTextView.setText(String.format("%d:%02d:%02d:%02d:%02d", days, hours, minutes, seconds, milliseconds));
-
     }
     //get
     public int getScore()

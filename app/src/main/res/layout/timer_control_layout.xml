@@ -13,20 +13,140 @@
         android:padding="16dp">
 
         <TextView
-            android:id="@+id/timerTitleTextView"
+            android:id="@+id/textTimerName"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Timer Name"
             android:textSize="24sp"
             android:layout_marginBottom="16dp" />
 
-        <TextView
-            android:id="@+id/timerTextView"
+        <!-- Горизонтальное размещение чисел и их единиц измерения -->
+
+        <LinearLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="00:00:00"
-            android:textSize="48sp" />
+            android:orientation="horizontal"
+            android:gravity="center_horizontal">
 
+            <!-- День -->
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:layout_marginEnd="8dp"
+                android:gravity="center_horizontal">
+
+                <TextView
+                    android:id="@+id/daysValue"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:gravity="center_horizontal"
+                    android:text="0"
+                    android:textSize="40sp" /> <!-- Увеличили на 1.5 раза -->
+
+                <TextView
+                    android:id="@+id/daysLabel"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:gravity="center_horizontal"
+                    android:text="дн"
+                    android:textSize="30sp" /> <!-- Увеличили на 1.5 раза -->
+            </LinearLayout>
+
+            <!-- Часы -->
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:layout_marginEnd="8dp"
+                android:gravity="center_horizontal">
+
+                <TextView
+                    android:id="@+id/hoursValue"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="0"
+                    android:textSize="40sp" /> <!-- Увеличили на 1.5 раза -->
+
+                <TextView
+                    android:id="@+id/hoursLabel"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="чс"
+                    android:textSize="30sp" /> <!-- Увеличили на 1.5 раза -->
+            </LinearLayout>
+
+            <!-- Минуты -->
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:layout_marginEnd="8dp"
+                android:gravity="center_horizontal">
+
+                <TextView
+                    android:id="@+id/minutesValue"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="0"
+                    android:textSize="40sp" /> <!-- Увеличили на 1.5 раза -->
+
+                <TextView
+                    android:id="@+id/minutesLabel"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="мн"
+                    android:textSize="30sp" /> <!-- Увеличили на 1.5 раза -->
+            </LinearLayout>
+
+            <!-- Секунды -->
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:layout_marginEnd="8dp"
+                android:gravity="center_horizontal">
+
+                <TextView
+                    android:id="@+id/secondsValue"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="0"
+                    android:textSize="40sp" /> <!-- Увеличили на 1.5 раза -->
+
+                <TextView
+                    android:id="@+id/secondsLabel"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="сек"
+                    android:textSize="30sp" /> <!-- Увеличили на 1.5 раза -->
+            </LinearLayout>
+
+            <!-- Миллисекунды -->
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:gravity="center_horizontal">
+
+                <TextView
+                    android:id="@+id/millisecondsValue"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="0"
+                    android:textSize="40sp" /> <!-- Увеличили на 1.5 раза -->
+
+                <TextView
+                    android:id="@+id/millisecondsLabel"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="мс"
+                    android:textSize="30sp" /> <!-- Увеличили на 1.5 раза -->
+            </LinearLayout>
+        </LinearLayout>
+
+
+        <!-- Основная кнопка -->
         <Button
             android:id="@+id/toggleButton"
             android:layout_width="wrap_content"
@@ -36,6 +156,7 @@
             android:padding="16dp"
             android:background="@drawable/button_background" />
 
+        <!-- Анимация -->
         <com.airbnb.lottie.LottieAnimationView
             android:id="@+id/animation_button_view"
             android:layout_width="100dp"
@@ -46,7 +167,7 @@
             app:lottie_loop="false" />
     </LinearLayout>
 
-    <!-- Новая круглая красная кнопка с белым крестиком -->
+    <!-- Кнопка закрытия -->
     <Button
         android:id="@+id/closeButton"
         android:layout_width="48dp"
