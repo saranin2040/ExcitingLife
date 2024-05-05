@@ -2,19 +2,14 @@ package com.example.excitinglife;
 
 import android.os.Bundle;
 import android.util.Log;
-import android.view.LayoutInflater;
-import android.view.View;
-import android.view.ViewGroup;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.viewpager.widget.ViewPager;
 
 import com.example.excitinglife.BusinessLogic.BusinessLogic;
-import com.example.excitinglife.BusinessLogic.Commodity.Commodity;
 import com.example.excitinglife.Controller.ScreenSlidePagerAdapter;
-import com.example.excitinglife.Controller.TimerControlFragment;
+import com.example.excitinglife.Visual.Visual;
 
-import java.security.AccessController;
 import java.util.HashMap;
 
 public class MainActivity extends AppCompatActivity {
@@ -88,6 +83,11 @@ public class MainActivity extends AppCompatActivity {
     {
         return bc.get(0);
     }
+    static public Visual getVisual()
+    {
+        return visual;
+    }
+    static private Visual visual=new Visual();
     static public HashMap<Integer, BusinessLogic> bc=new HashMap<Integer, BusinessLogic>();
 
 }

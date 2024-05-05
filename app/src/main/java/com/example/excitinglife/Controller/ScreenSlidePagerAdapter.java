@@ -4,6 +4,8 @@ import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentPagerAdapter;
 
+import com.example.excitinglife.Controller.StopwatchPageController.StopwatchPageController;
+
 public class ScreenSlidePagerAdapter extends FragmentPagerAdapter {
 
     private static final int NUM_PAGES = 3;
@@ -19,7 +21,7 @@ public class ScreenSlidePagerAdapter extends FragmentPagerAdapter {
             case 0:
                 return new LogFragment(); // Новый фрагмент с логами
             case 1:
-                return new TimerFragment(); // Существующий фрагмент с таймером
+                return new StopwatchPageController(); // Существующий фрагмент с таймером
             case 2:
                 return new SecondScreenFragment(); // Существующий второй экран
             default:
