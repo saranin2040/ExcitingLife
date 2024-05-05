@@ -5,4 +5,5 @@ public interface Stopwatch
     String getName();
     long getElapsedTime();
     boolean isLaunch();
+    boolean isStart();
 }

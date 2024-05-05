@@ -8,6 +8,7 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.example.excitinglife.Controller.StopwatchPageController.StopwatchFragmentController.CloseButtonClickListener;
+import com.example.excitinglife.Controller.StopwatchPageController.StopwatchFragmentController.ResetButtonClickListener;
 import com.example.excitinglife.Controller.StopwatchPageController.StopwatchFragmentController.StartButtonClickListener;
 import com.example.excitinglife.R;
 import com.example.excitinglife.Visual.StopwatchPage.StopwatchFragment;
@@ -37,11 +38,13 @@ public class Visual
 
         Button toggleButton = timerControlView.findViewById(R.id.toggleButton);
         Button closeButton = timerControlView.findViewById(R.id.closeButton);
+        Button resetButton = timerControlView.findViewById(R.id.resetButton);
 
-        stopwatchFragments.put(id,new StopwatchFragment(daysValue,hoursValue,minutesValue,secondsValue,millisecondsValue,toggleButton,container,timerControlView));
+        stopwatchFragments.put(id,new StopwatchFragment(daysValue,hoursValue,minutesValue,secondsValue,millisecondsValue,toggleButton,resetButton,container,timerControlView));
 
         toggleButton.setOnClickListener(new StartButtonClickListener(id));
         closeButton.setOnClickListener(new CloseButtonClickListener(id));
+        resetButton.setOnClickListener(new ResetButtonClickListener(id));
 
         container.addView(timerControlView);
     }
@@ -51,9 +54,19 @@ public class Visual
         stopwatchFragments.get(id).setTimer(days, hours, minutes, seconds, milliseconds);
     }
 
-    public void setTextStartButtonStopwatch(Integer id, String string)
+    public void paintBeginStopwatchState(Integer id)
     {
-        stopwatchFragments.get(id).setTextStartButton(string);
+        stopwatchFragments.get(id).setBeginState();
+    }
+
+    public void paintStartStopwatchState(Integer id)
+    {
+        stopwatchFragments.get(id).setStartState();
+    }
+
+    public void paintStopStopwatchState(Integer id)
+    {
+        stopwatchFragments.get(id).setStopState();
     }
 
     public void clearStopwatch(Integer id)

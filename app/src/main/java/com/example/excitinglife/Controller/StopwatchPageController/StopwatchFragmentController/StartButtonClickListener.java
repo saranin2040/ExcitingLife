@@ -31,12 +31,18 @@ public class StartButtonClickListener extends Fragment implements View.OnClickLi
     {
         if (isStart) {
             MainActivity.bc.get(0).startStopwatch(id);
-            MainActivity.getVisual().setTextStartButtonStopwatch(id,"Остановить");
+            MainActivity.getVisual().paintStartStopwatchState(id);
             handler.postDelayed(timerRunnable, 0);
-        } else {
-            MainActivity.bc.get(0).stopStopwatch(id);
-            MainActivity.getVisual().setTextStartButtonStopwatch(id,"Старт");
-            handler.removeCallbacks(timerRunnable);
+        } else
+        {
+            if (MainActivity.bc.get(0).getStopwatchs().get(id).isStart()) {
+                MainActivity.bc.get(0).stopStopwatch(id);
+                MainActivity.getVisual().paintStopStopwatchState(id);
+                handler.removeCallbacks(timerRunnable);
+            }
+            else {
+                MainActivity.getVisual().paintBeginStopwatchState(id);
+            }
         }
     }
 

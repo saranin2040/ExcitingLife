@@ -11,7 +11,7 @@ public class StopwatchFragment
 {
 
     public StopwatchFragment(TextView daysValue, TextView hoursValue, TextView minutesValue, TextView secondsValue, TextView millisecondsValue, Button toggleButton,
-                             LinearLayout container, View timerControlView) {
+                             Button resetButton,LinearLayout container, View timerControlView) {
         this.daysValue = daysValue;
         this.hoursValue = hoursValue;
         this.minutesValue = minutesValue;
@@ -20,6 +20,7 @@ public class StopwatchFragment
         this.toggleButton=toggleButton;
         this.container=container;
         this.timerControlView=timerControlView;
+        this.resetButton=resetButton;
     }
 
     public void setTimer(int days,int hours,int minutes,int seconds,int milliseconds)
@@ -31,9 +32,22 @@ public class StopwatchFragment
         millisecondsValue.setText(String.format("%02d",milliseconds));
     }
 
-    public void setTextStartButton(String string)
+    public void setBeginState()
     {
-        toggleButton.setText(string);
+        resetButton.setVisibility(View.GONE);
+        toggleButton.setText("Запустить дебила");
+    }
+
+    public void setStartState()
+    {
+        resetButton.setVisibility(View.GONE);
+        toggleButton.setText("Остановить");
+    }
+
+    public void setStopState()
+    {
+        resetButton.setVisibility(View.VISIBLE);
+        toggleButton.setText("Возобновить");
     }
 
     public void clear()
@@ -42,7 +56,7 @@ public class StopwatchFragment
     }
 
     private Button toggleButton;
-    private Button closeButton;
+    private Button resetButton;
     private TextView timerName;
     private TextView daysValue;
     private TextView hoursValue;

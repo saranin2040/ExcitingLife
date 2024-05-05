@@ -34,11 +34,14 @@ public class StopwatchDo implements Stopwatch, Serializable
         return launch;
     }
 
-    public void start(){
+    @Override
+    public boolean isStart() {return isStart;}
 
-        if (!launch) {
-            //startTime = SystemClock.elapsedRealtime();
-            //elapsedTime=23700532302411L;
+    public void start()
+    {
+        if (!launch)
+        {
+            if (!isStart) {isStart=true;}
             startTime = SystemClock.elapsedRealtime();
             launch = true;
         }
@@ -55,11 +58,21 @@ public class StopwatchDo implements Stopwatch, Serializable
         }
     }
 
+    public void reset()
+    {
+        stop();
+        isStart=false;
+        startTime=0L;
+        elapsedTime=0L;
+    }
+
+
     private String name=null;
     private long startTime;
     private long elapsedTime=0L;
 
     private boolean launch=false;
+    private boolean isStart=false;
 
     private static final long serialVersionUID = 1L;
 

@@ -117,11 +117,16 @@ public class BusinessLogic
 
     public void stopStopwatch(Integer stopwatchId)
     {
-        Log.d("saranin","bc stop stopwatch");
         StopwatchDo stopwatch= (StopwatchDo) stopwatchs.get(stopwatchId);
         stopwatch.stop();
-        //saveStopwatches();
     }
+
+    public void resetStopwatch(Integer stopwatchId)
+    {
+        StopwatchDo stopwatch= (StopwatchDo) stopwatchs.get(stopwatchId);
+        stopwatch.reset();
+    }
+
 
 
 
