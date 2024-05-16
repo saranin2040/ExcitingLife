@@ -7,6 +7,8 @@ appcompat = "1.6.1"
 material = "1.10.0"
 lottie = "6.4.0"
 rive-android = "9.3.2"
+kotlin = "1.9.24"
+coreKtx = "1.13.1"
 
 [libraries]
 junit = { group = "junit", name = "junit", version.ref = "junit" }
@@ -16,10 +18,12 @@ appcompat = { group = "androidx.appcompat", name = "appcompat", version.ref = "a
 material = { group = "com.google.android.material", name = "material", version.ref = "material" }
 lottie = { module = "com.airbnb.android:lottie", version.ref = "lottie" }
 riveandroid = { module = "app.rive:rive-android", version.ref = "rive-android" }
+core-ktx = { group = "androidx.core", name = "core-ktx", version.ref = "coreKtx" }
 
 
 [plugins]
 androidApplication = { id = "com.android.application", version.ref = "agp" }
+jetbrainsKotlinAndroid = { id = "org.jetbrains.kotlin.android", version.ref = "kotlin" }
 
 
 
